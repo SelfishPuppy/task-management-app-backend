@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  email String
+  hash  String
+
+  firstName String
+  lastName  String
+
+  Todo     Task[]
+  Category Category[]
+  Tag      Tag[]
+}
+
+model Task {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  categoryId Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  title       String
+  description String
+  priority    String
+  status      String
+
+  dueDate DateTime?
+
+  user     User     @relation(fields: [userId], references: [id])
+  category Category @relation(fields: [categoryId], references: [id])
+
+  Tag Tag[]
+}
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String
+
+  Todo Task[]
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Tag {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  todoId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String
+
+  user User @relation(fields: [userId], references: [id])
+  todo Task @relation(fields: [todoId], references: [id])
+}
