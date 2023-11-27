@@ -15,11 +15,12 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  email String
-  hash  String
+  email String @unique
 
-  firstName String
-  lastName  String
+  hash String
+
+  firstName String?
+  lastName  String?
 
   Todo     Task[]
   Category Category[]
