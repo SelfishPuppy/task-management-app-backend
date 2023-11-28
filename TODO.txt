@@ -1,0 +1,2 @@
+1. Implement User requests (update(firstName, secondName), delete(user))
+2. Implement User Service methods (changeEmail(user, email), changePassword(user,password))

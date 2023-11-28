@@ -4,6 +4,7 @@ import { AuthDto } from './dto';
 import { GetUser } from './decorator/user.decorator';
 import { User } from '@prisma/client';
 import { JwtRefreshGuard } from './guard';
+import { debug } from 'console';
 
 @Controller('auth')
 export class AuthController {
@@ -11,6 +12,7 @@ export class AuthController {
 
   @Post('signup')
   signUp(@Body() dto: AuthDto) {
+    debug(dto);
     return this.authService.signUp(dto);
   }
 
@@ -18,6 +20,7 @@ export class AuthController {
   login(@Body() dto: AuthDto) {
     return this.authService.login(dto);
   }
+
   @UseGuards(JwtRefreshGuard)
   @Post('refresh')
   refresh(@GetUser() user: User) {
