@@ -15,7 +15,7 @@ export class CategoryService {
   ): Promise<Category> {
     try {
       const category = await this.prismaService.category.create({
-        data: { userId: user.id, name: createCategoryDto.name },
+        data: { userId: user.id, ...createCategoryDto },
       });
       return category;
     } catch (error) {
