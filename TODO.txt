@@ -1,2 +1,6 @@
 1. Implement User requests (update(firstName, secondName), delete(user))
 2. Implement User Service methods (changeEmail(user, email), changePassword(user,password))
+3. Implement Task CRUD requests
+4. Implement Category CRUD requests
+5. Implement Tag CRUD requests
+6. Ensure to use controller level guard

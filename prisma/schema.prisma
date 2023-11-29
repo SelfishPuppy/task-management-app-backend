@@ -41,10 +41,10 @@ model Task {
 
   dueDate DateTime?
 
+  tags Tag[]
+
   user     User     @relation(fields: [userId], references: [id])
   category Category @relation(fields: [categoryId], references: [id])
-
-  Tag Tag[]
 }
 
 model Category {
@@ -53,9 +53,9 @@ model Category {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  name String
+  name String @unique
 
-  Todo Task[]
+  tasks Task[]
 
   user User @relation(fields: [userId], references: [id])
 }
@@ -63,12 +63,12 @@ model Category {
 model Tag {
   id        Int      @id @default(autoincrement())
   userId    Int
-  todoId    Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  name String
+  name String @unique
+
+  tasks Task[]
 
   user User @relation(fields: [userId], references: [id])
-  todo Task @relation(fields: [todoId], references: [id])
 }
